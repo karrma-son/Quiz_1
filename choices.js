@@ -3,11 +3,13 @@ let answerA = document.getElementById("a-answer");
 let answerB = document.getElementById("b-answer");
 let answerC = document.getElementById("c-answer");
 let gradeText = document.getElementById("grade-text");
+let tryAgain = document.getElementById("try-again")
 const startButton = document.getElementById("start-btn");
 let resetButton = document.getElementById("reset-btn")
 const aButton = document.getElementById("a-btn");
 const bButton = document.getElementById("b-btn");
 const cButton = document.getElementById("c-btn");
+
 
 let score = 0;
 let questionIndex = 0; 
@@ -20,7 +22,7 @@ const questionList = [
         correctAnswer: 1
     },
     {   id:1,
-        question: "What is the capitol of the United States of America",
+        question: "What is the capital of the United States of America?",
         answer : ["New York City", "Boston", "Washington D.C."],
         correctAnswer: 2
     },
@@ -35,7 +37,7 @@ const questionList = [
         correctAnswer: 0
     },
     {   id:4,
-        question: "How many different time zones are across the Contiguous US?",
+        question: "How many main time zones are across the Contiguous US?",
         answer : [6, 4, 3],
         correctAnswer: 1
     },
@@ -46,17 +48,17 @@ const questionList = [
     },
     
     {   id:6,
-        question: "Who issued the Emancipation Proclamation ?",
+        question: "Who issued the Emancipation Proclamation?",
         answer : ["James Monroe", "Harry Truman", "Abraham Lincoln"],
         correctAnswer: 2
     },
     {   id:7,
-        question: "What is the largest city in the United States of America",
+        question: "What is the largest city in the United States of America?",
         answer : ["New York City", "Los Angeles", "Chicago"],
         correctAnswer: 0
     },
     {   id:8,
-        question: "What are the first amenedments to the Constitution called?",
+        question: "What are the first amendments to the Constitution called?",
         answer : ["Magna Carta", "the Bill of Rights", "the Declaration of Independence"],
         correctAnswer: 1
     },
@@ -83,6 +85,9 @@ function viewButtons(){
     aButton.style.visibility = "visible";
     bButton.style.visibility = "visible";
     cButton.style.visibility = "visible"; 
+    gradeText.style.visibility = "hidden";
+    tryAgain.style.visibility = "hidden";
+    resetButton.style.visibility = "hidden";
 }
 
 hideButtons();
@@ -94,10 +99,8 @@ startButton.addEventListener("click",() => {
 });
 
 resetButton.addEventListener("click",() => {
-    resetButton.style.visibility = "hidden";
     score = 0; 
-    questionIndex = 0
-    gradeText.style.visibility = "hidden"
+    questionIndex = 0;
     viewButtons();
     questionAsker();
 });
@@ -143,6 +146,7 @@ function checkAnswer() {
     let finalScore = Math.round(totalScore);
     resetButton.style.visibility= "visible";
     gradeText.style.visibility = "visible";
+    tryAgain.style.visibility="visible";
 
     if (totalScore >= 90){
         gradeLetter = "A"
@@ -161,7 +165,8 @@ function checkAnswer() {
        gradeText.textContent = `with a score of ${finalScore}%`
     } else {
         questionText.textContent = `Your grade is ${gradeLetter}`
-        gradeText.textContent = `with a score of ${finalScore}% - Try Again?`
+        gradeText.textContent = `with a score of ${finalScore}% `
+        tryAgain.textContent = "- Try Again?"
     };
 };
 
